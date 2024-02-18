@@ -1,0 +1,20 @@
+version: "2"
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server.Dockerfile
+    environment:
+      SERVER_HOST: "0.0.0.0"
+      SERVER_PORT: "5134"
+    ports:
+      - "5134:5134"
+  client:
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+    environment:
+      SERVER_HOST: "server"
+      SERVER_PORT: "5134"
+    depends_on:
+      - server
